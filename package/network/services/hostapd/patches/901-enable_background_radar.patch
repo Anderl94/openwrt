@@ -1,0 +1,11 @@
+--- a/hostapd/hostapd.conf
++++ b/hostapd/hostapd.conf
+@@ -233,7 +233,7 @@ channel=1
+ # do not advertise support for the capability.
+ # 0: Leave disabled (default)
+ # 1: Enable it.
+-#enable_background_radar=1
++enable_background_radar=1
+ 
+ # Set minimum permitted max TX power (in dBm) for ACS and DFS channel selection.
+ # (default 0, i.e., not constraint)
