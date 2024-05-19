@@ -28,6 +28,7 @@ drv_mac80211_init_device_config() {
 
 	config_add_string path phy 'macaddr:macaddr'
 	config_add_string tx_burst
+	config_add_int sr_enable sr_enhanced
 	config_add_string distance
 	config_add_int beacon_int chanbw frag rts
 	config_add_int rxantenna txantenna txpower min_tx_power
@@ -55,7 +56,8 @@ drv_mac80211_init_device_config() {
 		he_spr_sr_control \
 		he_spr_psr_enabled \
 		he_bss_color_enabled \
-		he_twt_required
+		he_twt_required \
+		he_twt_responder
 	config_add_int \
 		beamformer_antennas \
 		beamformee_antennas \
@@ -163,20 +165,41 @@ mac80211_hostapd_setup_base() {
 	ht_capab=
 	case "$htmode" in
 		VHT20|HT20|HE20) ;;
-		HT40*|VHT40|VHT80|VHT160|HE40|HE80|HE160)
+		HT40*|VHT40|VHT80|VHT160|HE40*|HE80|HE160)
 			case "$hwmode" in
 				a)
 					case "$(( (($channel / 4) + $chan_ofs) % 2 ))" in
 						1) ht_capab="[HT40+]";;
 						0) ht_capab="[HT40-]";;
 					esac
+					case "$htmode" in
+						HT40-|HE40-)
+							if [ "$auto_channel" -gt 0 ]; then
+								ht_capab="[HT40-]"
+							fi
+						;;
+					esac
 				;;
 				*)
 					case "$htmode" in
-						HT40+) ht_capab="[HT40+]";;
-						HT40-) ht_capab="[HT40-]";;
+						HT40+|HE40+)
+							if [ "$channel" -gt 9 ]; then
+								echo "Could not set the center freq with this HT mode setting"
+								return 1
+							else
+								ht_capab="[HT40+]"
+							fi
+						;;
+						HT40-|HE40-)
+							if [ "$channel" -lt 5 -a "$auto_channel" -eq 0 ]; then
+								echo "Could not set the center freq with this HT mode setting"
+								return 1
+							else
+								ht_capab="[HT40-]"
+							fi
+						;;
 						*)
-							if [ "$channel" -lt 7 ]; then
+							if [ "$channel" -lt 7 -o "$auto_channel" -gt 0 ]; then
 								ht_capab="[HT40+]"
 							else
 								ht_capab="[HT40-]"
@@ -185,7 +208,6 @@ mac80211_hostapd_setup_base() {
 					esac
 				;;
 			esac
-			[ "$auto_channel" -gt 0 ] && ht_capab="[HT40+]"
 		;;
 		*) ieee80211n= ;;
 	esac
@@ -318,7 +340,6 @@ mac80211_hostapd_setup_base() {
 			vht_link_adapt:3 \
 			vht160:2
 
-		set_default tx_burst 2.0
 		append base_cfg "ieee80211ac=1" "$N"
 		vht_cap=0
 		for cap in $(iw phy "$phy" info | awk -F "[()]" '/VHT Capabilities/ { print $2 }'); do
@@ -427,6 +448,7 @@ mac80211_hostapd_setup_base() {
 			he_su_beamformee:1 \
 			he_mu_beamformer:1 \
 			he_twt_required:0 \
+			he_twt_responder \
 			he_spr_sr_control:3 \
 			he_spr_psr_enabled:0 \
 			he_spr_non_srg_obss_pd_max_offset:0 \
@@ -443,13 +465,17 @@ mac80211_hostapd_setup_base() {
 			append base_cfg "he_oper_chwidth=$vht_oper_chwidth" "$N"
 			append base_cfg "he_oper_centr_freq_seg0_idx=$vht_center_seg0" "$N"
 		}
-
+		
 		mac80211_add_he_capabilities \
 			he_su_beamformer:${he_phy_cap:6:2}:0x80:$he_su_beamformer \
 			he_su_beamformee:${he_phy_cap:8:2}:0x1:$he_su_beamformee \
 			he_mu_beamformer:${he_phy_cap:8:2}:0x2:$he_mu_beamformer \
 			he_spr_psr_enabled:${he_phy_cap:14:2}:0x1:$he_spr_psr_enabled \
 			he_twt_required:${he_mac_cap:0:2}:0x6:$he_twt_required
+			
+		if [ -n "$he_twt_responder" ]; then
+			append base_cfg "he_twt_responder=$he_twt_responder" "$N"
+		fi
 
 		if [ "$he_bss_color_enabled" -gt 0 ]; then
 			append base_cfg "he_bss_color=$he_bss_color" "$N"
@@ -491,6 +517,8 @@ mac80211_hostapd_setup_base() {
 		append base_cfg "he_mu_edca_ac_vo_ecwmax=7" "$N"
 		append base_cfg "he_mu_edca_ac_vo_timer=255" "$N"
 	fi
+	
+	set_default tx_burst 2
 
 	hostapd_prepare_device_config "$hostapd_conf_file" nl80211
 	cat >> "$hostapd_conf_file" <<EOF
@@ -1059,6 +1087,7 @@ drv_mac80211_setup() {
 		txpower \
 		rxantenna txantenna \
 		frag rts beacon_int:100 htmode \
+		sr_enable sr_enhanced \
 		num_global_macaddr:1 multiple_bssid
 	json_get_values basic_rate_list basic_rate
 	json_get_values scan_list scan_list
@@ -1146,6 +1175,9 @@ drv_mac80211_setup() {
 	active_ifnames=
 	for_each_interface "ap sta adhoc mesh monitor" mac80211_prepare_vif
 	for_each_interface "ap sta adhoc mesh monitor" mac80211_setup_vif
+	
+	[ -n "$sr_enable" ] && echo "$sr_enable" > /sys/kernel/debug/ieee80211/$phy/mt76/sr_enable
+	[ -n "$sr_enhanced" ] && echo "$sr_enhanced" > /sys/kernel/debug/ieee80211/$phy/mt76/sr_enhanced_enable
 
 	[ -x /usr/sbin/wpa_supplicant ] && wpa_supplicant_set_config "$phy"
 	[ -x /usr/sbin/hostapd ] && hostapd_set_config "$phy"
