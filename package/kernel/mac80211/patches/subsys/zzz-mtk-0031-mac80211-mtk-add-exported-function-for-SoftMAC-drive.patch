@@ -34,7 +34,7 @@ Signed-off-by: Benjamin Lin <benjamin-jw.lin@mediatek.com>
  #endif /* MAC80211_H */
 --- a/net/mac80211/util.c
 +++ b/net/mac80211/util.c
-@@ -5158,3 +5158,10 @@ unsigned long ieee80211_get_scanning(str
+@@ -5162,3 +5162,10 @@ unsigned long ieee80211_get_scanning(str
  }
  EXPORT_SYMBOL(ieee80211_get_scanning);
  

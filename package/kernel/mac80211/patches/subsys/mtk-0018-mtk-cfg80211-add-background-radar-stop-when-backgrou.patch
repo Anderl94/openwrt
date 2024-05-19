@@ -9,11 +9,9 @@ Signed-off-by: StanleyYP Wang <StanleyYP.Wang@mediatek.com>
  net/wireless/nl80211.c | 4 ++++
  1 file changed, 4 insertions(+)
 
-diff --git a/net/wireless/nl80211.c b/net/wireless/nl80211.c
-index 3046677..2be678c 100644
 --- a/net/wireless/nl80211.c
 +++ b/net/wireless/nl80211.c
-@@ -10040,6 +10040,10 @@ static int nl80211_start_radar_detection(struct sk_buff *skb,
+@@ -10046,6 +10046,10 @@ static int nl80211_start_radar_detection
  		wdev->cac_started = true;
  		wdev->cac_start_time = jiffies;
  		wdev->cac_time_ms = cac_time_ms;
@@ -24,6 +22,3 @@ index 3046677..2be678c 100644
  	}
  unlock:
  	wiphy_unlock(wiphy);
--- 
-2.18.0
-

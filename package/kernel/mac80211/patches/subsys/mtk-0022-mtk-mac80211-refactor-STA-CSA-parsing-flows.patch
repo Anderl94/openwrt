@@ -23,8 +23,6 @@ Signed-off-by: Michael-CY Lee <michael-cy.lee@mediatek.com>
  net/mac80211/spectmgmt.c | 508 ++++++++++++++++++++++++++++++++++-----
  1 file changed, 454 insertions(+), 54 deletions(-)
 
-diff --git a/net/mac80211/spectmgmt.c b/net/mac80211/spectmgmt.c
-index 871cdac..dee7a60 100644
 --- a/net/mac80211/spectmgmt.c
 +++ b/net/mac80211/spectmgmt.c
 @@ -19,6 +19,332 @@
@@ -360,7 +358,7 @@ index 871cdac..dee7a60 100644
  int ieee80211_parse_ch_switch_ie(struct ieee80211_sub_if_data *sdata,
  				 struct ieee802_11_elems *elems,
  				 enum nl80211_band current_band,
-@@ -26,19 +352,27 @@ int ieee80211_parse_ch_switch_ie(struct ieee80211_sub_if_data *sdata,
+@@ -26,19 +352,27 @@ int ieee80211_parse_ch_switch_ie(struct
  				 ieee80211_conn_flags_t conn_flags, u8 *bssid,
  				 struct ieee80211_csa_ie *csa_ie)
  {
@@ -391,7 +389,7 @@ index 871cdac..dee7a60 100644
  
  	if (conn_flags & (IEEE80211_CONN_DISABLE_HT |
  			  IEEE80211_CONN_DISABLE_40MHZ)) {
-@@ -46,29 +380,30 @@ int ieee80211_parse_ch_switch_ie(struct ieee80211_sub_if_data *sdata,
+@@ -46,29 +380,30 @@ int ieee80211_parse_ch_switch_ie(struct
  		wide_bw_chansw_ie = NULL;
  	}
  
@@ -439,7 +437,7 @@ index 871cdac..dee7a60 100644
  	/* Mesh Channel Switch Parameters Element */
  	if (elems->mesh_chansw_params_ie) {
  		csa_ie->ttl = elems->mesh_chansw_params_ie->mesh_ttl;
-@@ -132,54 +467,119 @@ int ieee80211_parse_ch_switch_ie(struct ieee80211_sub_if_data *sdata,
+@@ -132,54 +467,119 @@ int ieee80211_parse_ch_switch_ie(struct
  		break;
  	}
  
@@ -458,11 +456,6 @@ index 871cdac..dee7a60 100644
 -				cpu_to_le16(new_seg1 <<
 -					    IEEE80211_HT_OP_MODE_CCFS2_SHIFT),
 -		};
--
--		/* default, for the case of IEEE80211_VHT_CHANWIDTH_USE_HT,
--		 * to the previously parsed chandef
--		 */
--		new_vht_chandef = csa_ie->chandef;
 +	if (new_band == NL80211_BAND_6GHZ) {
 +		size = sizeof(struct ieee80211_he_operation) +
 +		       sizeof(struct ieee80211_he_6ghz_oper);
@@ -477,7 +470,11 @@ index 871cdac..dee7a60 100644
 +			kfree(he_oper);
 +			return -ENOMEM;
 +		}
-+
+ 
+-		/* default, for the case of IEEE80211_VHT_CHANWIDTH_USE_HT,
+-		 * to the previously parsed chandef
+-		 */
+-		new_vht_chandef = csa_ie->chandef;
 +		if (new_op_class && new_op_class != 135 && new_op_class != 137) {
 +			/* There is no way to tell the ccfs1 for op_class 135
 +			 * (80P80 MHz) and 137 (320 MHz).
@@ -593,6 +590,3 @@ index 871cdac..dee7a60 100644
  	if (elems->max_channel_switch_time)
  		csa_ie->max_switch_time =
  			(elems->max_channel_switch_time[0] << 0) |
--- 
-2.18.0
-

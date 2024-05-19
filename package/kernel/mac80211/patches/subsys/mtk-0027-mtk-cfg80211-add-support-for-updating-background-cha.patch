@@ -11,15 +11,12 @@ Signed-off-by: StanleyYP Wang <StanleyYP.Wang@mediatek.com>
  net/wireless/mlme.c          | 12 ++++++++++++
  3 files changed, 32 insertions(+)
 
-diff --git a/include/net/cfg80211.h b/include/net/cfg80211.h
-index 19c8abe..2e499ed 100644
 --- a/include/net/cfg80211.h
 +++ b/include/net/cfg80211.h
-@@ -8540,6 +8540,20 @@ void cfg80211_sta_update_dfs_state(struct wireless_dev *wdev,
- 				   const struct cfg80211_chan_def *csa_chandef,
+@@ -8546,6 +8546,20 @@ void cfg80211_sta_update_dfs_state(struc
  				   bool associated);
  
-+/**
+ /**
 + * cfg80211_background_radar_update_channel - notify background chandef has been updated
 + * @wiphy: the wiphy
 + * @chandef: the updated chandef
@@ -33,11 +30,10 @@ index 19c8abe..2e499ed 100644
 +					      const struct cfg80211_chan_def *chandef,
 +					      bool expand);
 +
- /**
++/**
   * cfg80211_background_cac_abort - Channel Availability Check offchan abort event
   * @wiphy: the wiphy
-diff --git a/include/uapi/linux/nl80211.h b/include/uapi/linux/nl80211.h
-index 60c6f79..6e96ad9 100644
+  *
 --- a/include/uapi/linux/nl80211.h
 +++ b/include/uapi/linux/nl80211.h
 @@ -6671,6 +6671,10 @@ enum nl80211_smps_mode {
@@ -60,11 +56,9 @@ index 60c6f79..6e96ad9 100644
  	NL80211_RADAR_STA_CAC_SKIPPED,
  	NL80211_RADAR_STA_CAC_EXPIRED,
  };
-diff --git a/net/wireless/mlme.c b/net/wireless/mlme.c
-index e264609..8e77205 100644
 --- a/net/wireless/mlme.c
 +++ b/net/wireless/mlme.c
-@@ -1173,6 +1173,18 @@ cfg80211_start_background_radar_detection(struct cfg80211_registered_device *rde
+@@ -1173,6 +1173,18 @@ cfg80211_start_background_radar_detectio
  	return 0;
  }
  
@@ -83,6 +77,3 @@ index e264609..8e77205 100644
  void cfg80211_stop_background_radar_detection(struct wireless_dev *wdev)
  {
  	struct wiphy *wiphy = wdev->wiphy;
--- 
-2.18.0
-

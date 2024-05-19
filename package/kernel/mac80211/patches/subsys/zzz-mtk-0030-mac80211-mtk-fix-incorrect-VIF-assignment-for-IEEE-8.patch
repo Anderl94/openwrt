@@ -11,11 +11,9 @@ Signed-off-by: Benjamin Lin <benjamin-jw.lin@mediatek.com>
  net/mac80211/tx.c | 5 ++++-
  1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/net/mac80211/tx.c b/net/mac80211/tx.c
-index 4085444..0577764 100644
 --- a/net/mac80211/tx.c
 +++ b/net/mac80211/tx.c
-@@ -3736,8 +3736,11 @@ begin:
+@@ -3829,8 +3829,11 @@ begin:
  	skb = __skb_dequeue(&txqi->frags);
  	if (unlikely(skb)) {
  		if (!(IEEE80211_SKB_CB(skb)->control.flags &
@@ -28,6 +26,3 @@ index 4085444..0577764 100644
  		IEEE80211_SKB_CB(skb)->control.flags &=
  			~IEEE80211_TX_INTCFL_NEED_TXPROCESSING;
  	} else {
--- 
-2.18.0
-

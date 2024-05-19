@@ -8,11 +8,9 @@ Subject: [PATCH 07/37] mtk: mac80211: check the control channel before
  net/mac80211/mlme.c | 23 +++++++++++++++++++++++
  1 file changed, 23 insertions(+)
 
-diff --git a/net/mac80211/mlme.c b/net/mac80211/mlme.c
-index 73f8df0..24d34d4 100644
 --- a/net/mac80211/mlme.c
 +++ b/net/mac80211/mlme.c
-@@ -4814,6 +4814,26 @@ ieee80211_verify_sta_eht_mcs_support(struct ieee80211_sub_if_data *sdata,
+@@ -4814,6 +4814,26 @@ ieee80211_verify_sta_eht_mcs_support(str
  	return true;
  }
  
@@ -39,7 +37,7 @@ index 73f8df0..24d34d4 100644
  static int ieee80211_prep_channel(struct ieee80211_sub_if_data *sdata,
  				  struct ieee80211_link_data *link,
  				  struct cfg80211_bss *cbss,
-@@ -5056,6 +5076,9 @@ static int ieee80211_prep_channel(struct ieee80211_sub_if_data *sdata,
+@@ -5060,6 +5080,9 @@ static int ieee80211_prep_channel(struct
  	    chandef.width == NL80211_CHAN_WIDTH_10)
  		goto out;
  
@@ -49,6 +47,3 @@ index 73f8df0..24d34d4 100644
  	while (ret && chandef.width != NL80211_CHAN_WIDTH_20_NOHT) {
  		*conn_flags |=
  			ieee80211_chandef_downgrade(&chandef);
--- 
-2.18.0
-

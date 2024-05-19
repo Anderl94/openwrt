@@ -8,11 +8,9 @@ Subject: [PATCH 01/37] mtk: mac80211: do not setup twt when twt responder is
  net/mac80211/rx.c | 3 +++
  1 file changed, 3 insertions(+)
 
-diff --git a/net/mac80211/rx.c b/net/mac80211/rx.c
-index 961ef53..c23b74a 100644
 --- a/net/mac80211/rx.c
 +++ b/net/mac80211/rx.c
-@@ -3422,6 +3422,9 @@ ieee80211_process_rx_twt_action(struct ieee80211_rx_data *rx)
+@@ -3422,6 +3422,9 @@ ieee80211_process_rx_twt_action(struct i
  	if (sdata->vif.type != NL80211_IFTYPE_AP)
  		return false;
  
@@ -22,6 +20,3 @@ index 961ef53..c23b74a 100644
  	if (!rx->local->ops->add_twt_setup)
  		return false;
  
--- 
-2.18.0
-

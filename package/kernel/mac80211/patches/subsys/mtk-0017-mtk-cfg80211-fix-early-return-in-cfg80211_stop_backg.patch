@@ -9,11 +9,9 @@ Signed-off-by: StanleyYP Wang <StanleyYP.Wang@mediatek.com>
  net/wireless/mlme.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/net/wireless/mlme.c b/net/wireless/mlme.c
-index 70b4013..e264609 100644
 --- a/net/wireless/mlme.c
 +++ b/net/wireless/mlme.c
-@@ -1184,9 +1184,9 @@ void cfg80211_stop_background_radar_detection(struct wireless_dev *wdev)
+@@ -1184,9 +1184,9 @@ void cfg80211_stop_background_radar_dete
  		return;
  
  	rdev_set_radar_background(rdev, NULL);
@@ -24,6 +22,3 @@ index 70b4013..e264609 100644
  					NL80211_RADAR_CAC_ABORTED);
 +	rdev->background_radar_wdev = NULL; /* Release offchain ownership */
  }
--- 
-2.18.0
-

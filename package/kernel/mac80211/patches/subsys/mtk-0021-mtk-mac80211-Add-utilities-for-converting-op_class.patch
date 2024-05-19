@@ -12,15 +12,12 @@ Signed-off-by: Michael-CY Lee <michael-cy.lee@mediatek.com>
  net/wireless/util.c    | 130 ++++++++++++++++++++++++++++++++++++++++-
  2 files changed, 154 insertions(+), 1 deletion(-)
 
-diff --git a/include/net/cfg80211.h b/include/net/cfg80211.h
-index 0b5a4e6..19c8abe 100644
 --- a/include/net/cfg80211.h
 +++ b/include/net/cfg80211.h
-@@ -8723,6 +8723,31 @@ void cfg80211_ch_switch_started_notify(struct net_device *dev,
- bool ieee80211_operating_class_to_band(u8 operating_class,
+@@ -8729,6 +8729,31 @@ bool ieee80211_operating_class_to_band(u
  				       enum nl80211_band *band);
  
-+/**
+ /**
 + * ieee80211_operating_class_to_center_freq - convert operating class to
 + * center frequency
 + *
@@ -45,14 +42,13 @@ index 0b5a4e6..19c8abe 100644
 +enum nl80211_chan_width
 +ieee80211_operating_class_to_chan_width(u8 operating_class);
 +
- /**
++/**
   * ieee80211_chandef_to_operating_class - convert chandef to operation class
   *
-diff --git a/net/wireless/util.c b/net/wireless/util.c
-index 1783ab9..13cb986 100644
+  * @chandef: the chandef to convert
 --- a/net/wireless/util.c
 +++ b/net/wireless/util.c
-@@ -1981,7 +1981,7 @@ bool ieee80211_operating_class_to_band(u8 operating_class,
+@@ -1981,7 +1981,7 @@ bool ieee80211_operating_class_to_band(u
  	case 128 ... 130:
  		*band = NL80211_BAND_5GHZ;
  		return true;
@@ -61,7 +57,7 @@ index 1783ab9..13cb986 100644
  		*band = NL80211_BAND_6GHZ;
  		return true;
  	case 81:
-@@ -1999,6 +1999,134 @@ bool ieee80211_operating_class_to_band(u8 operating_class,
+@@ -1999,6 +1999,134 @@ bool ieee80211_operating_class_to_band(u
  }
  EXPORT_SYMBOL(ieee80211_operating_class_to_band);
  
@@ -196,6 +192,3 @@ index 1783ab9..13cb986 100644
  bool ieee80211_chandef_to_operating_class(struct cfg80211_chan_def *chandef,
  					  u8 *op_class)
  {
--- 
-2.18.0
-
