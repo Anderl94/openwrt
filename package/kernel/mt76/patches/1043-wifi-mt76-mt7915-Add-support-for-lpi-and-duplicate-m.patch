@@ -172,7 +172,7 @@ Signed-off-by: Allen Ye <allen.ye@mediatek.com>
  		u8 category;
  		u8 rsv1;
 @@ -1374,7 +1373,7 @@ mt7915_txpower_info_show(struct seq_file
- 	seq_printf(file, "    Theraml Compensation Value: %d\n",
+ 	seq_printf(file, "    Thermal Compensation Value: %d\n",
  		   basic_info.thermal_compensate_value);
  
 -	np = mt76_find_power_limits_node(dev);

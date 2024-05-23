@@ -91,7 +91,7 @@ Signed-off-by: StanleyYP Wang <StanleyYP.Wang@mediatek.com>
 +		   basic_info.mu_tx_power_auto, basic_info.mu_tx_power_manual);
 +	seq_printf(file, "    Thermal Compensation:  %s\n",
 +		   basic_info.thermal_compensate_enable ? "enable" : "disable");
-+	seq_printf(file, "    Theraml Compensation Value: %d\n",
++	seq_printf(file, "    Thermal Compensation Value: %d\n",
 +		   basic_info.thermal_compensate_value);
 +
 +out:

@@ -91,7 +91,7 @@ Subject: [PATCH 1033/1053] wifi: mt76: mt7915: Disable RegDB when enable
  
  	ret = mt7915_mcu_get_txpower_sku(phy, (s8 *)&basic_info, sizeof(basic_info),
 @@ -1338,6 +1374,9 @@ mt7915_txpower_info_show(struct seq_file
- 	seq_printf(file, "    Theraml Compensation Value: %d\n",
+ 	seq_printf(file, "    Thermal Compensation Value: %d\n",
  		   basic_info.thermal_compensate_value);
  
 +	np = mt76_find_power_limits_node(dev);
