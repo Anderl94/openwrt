@@ -1,7 +1,7 @@
-From ee3f33638400dfe0306ed5d12f1e2c1840632cea Mon Sep 17 00:00:00 2001
+From 1de98ecb4505e3f99759caf4e9df9e263dfa403a Mon Sep 17 00:00:00 2001
 From: "Allen.Ye" <allen.ye@mediatek.com>
 Date: Fri, 11 Aug 2023 16:46:53 +0800
-Subject: [PATCH 1033/1053] wifi: mt76: mt7915: Disable RegDB when enable
+Subject: [PATCH 1033/1051] wifi: mt76: mt7915: Disable RegDB when enable
  single sku
 
 ---
@@ -91,7 +91,7 @@ Subject: [PATCH 1033/1053] wifi: mt76: mt7915: Disable RegDB when enable
  
  	ret = mt7915_mcu_get_txpower_sku(phy, (s8 *)&basic_info, sizeof(basic_info),
 @@ -1338,6 +1374,9 @@ mt7915_txpower_info_show(struct seq_file
- 	seq_printf(file, "    Thermal Compensation Value: %d\n",
+ 	seq_printf(file, "    Theraml Compensation Value: %d\n",
  		   basic_info.thermal_compensate_value);
  
 +	np = mt76_find_power_limits_node(dev);

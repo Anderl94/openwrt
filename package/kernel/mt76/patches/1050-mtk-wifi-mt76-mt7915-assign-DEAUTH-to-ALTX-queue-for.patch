@@ -1,7 +1,7 @@
-From 93810a9bad2fd59c8e4742195a3b5c53878116ef Mon Sep 17 00:00:00 2001
+From 236bc42c90160e3526d8901f3d983ebc76316ee2 Mon Sep 17 00:00:00 2001
 From: Michael-CY Lee <michael-cy.lee@mediatek.com>
 Date: Tue, 19 Mar 2024 08:35:26 +0800
-Subject: [PATCH 1052/1053] mtk: wifi: mt76: mt7915: assign DEAUTH to ALTX
+Subject: [PATCH 1050/1051] mtk: wifi: mt76: mt7915: assign DEAUTH to ALTX
  queue for CERT
 
 Signed-off-by: Michael-CY Lee <michael-cy.lee@mediatek.com>

@@ -1,7 +1,7 @@
-From e98f4b4ccc941705436b9cdfbd22b2e72b2ef055 Mon Sep 17 00:00:00 2001
+From 9196ca94b27491c6841a3a1a46afb8557f82e62d Mon Sep 17 00:00:00 2001
 From: MeiChia Chiu <meichia.chiu@mediatek.com>
 Date: Mon, 6 Jun 2022 20:15:51 +0800
-Subject: [PATCH] wifi: mt76: mt7915: certification patches
+Subject: [PATCH 1004/1051] wifi: mt76: mt7915: certification patches
 
 ---
  mt76_connac_mcu.h    |   1 +
@@ -35,7 +35,7 @@ Subject: [PATCH] wifi: mt76: mt7915: certification patches
  
  #define to_rssi(field, rcpi)	((FIELD_GET(field, rcpi) - 220) / 2)
  
-@@ -2002,6 +2003,21 @@ static void mt7915_mac_sta_stats_work(st
+@@ -1961,6 +1962,21 @@ static void mt7915_mac_sta_stats_work(st
  	spin_unlock_bh(&phy->stats_lock);
  }
  
@@ -57,7 +57,7 @@ Subject: [PATCH] wifi: mt76: mt7915: certification patches
  void mt7915_mac_sta_rc_work(struct work_struct *work)
  {
  	struct mt7915_dev *dev = container_of(work, struct mt7915_dev, rc_work);
-@@ -2024,6 +2040,13 @@ void mt7915_mac_sta_rc_work(struct work_
+@@ -1983,6 +1999,13 @@ void mt7915_mac_sta_rc_work(struct work_
  		sta = container_of((void *)msta, struct ieee80211_sta, drv_priv);
  		vif = container_of((void *)msta->vif, struct ieee80211_vif, drv_priv);
  
@@ -809,7 +809,7 @@ Subject: [PATCH] wifi: mt76: mt7915: certification patches
  #endif
 --- a/mt7915/mt7915.h
 +++ b/mt7915/mt7915.h
-@@ -735,6 +735,19 @@ int mt7915_mmio_wed_init(struct mt7915_d
+@@ -752,6 +752,19 @@ int mt7915_mmio_wed_init(struct mt7915_d
  			 bool pci, int *irq);
  
  #ifdef CONFIG_MTK_VENDOR
@@ -854,8 +854,8 @@ Subject: [PATCH] wifi: mt76: mt7915: certification patches
  
 --- a/mt7915/vendor.c
 +++ b/mt7915/vendor.c
-@@ -23,6 +23,29 @@ csi_ctrl_policy[NUM_MTK_VENDOR_ATTRS_CSI
- 	[MTK_VENDOR_ATTR_CSI_CTRL_DATA] = { .type = NLA_NESTED },
+@@ -24,6 +24,29 @@ csi_ctrl_policy[NUM_MTK_VENDOR_ATTRS_CSI
+ 	[MTK_VENDOR_ATTR_CSI_CTRL_DUMP_MAC_FILTER] = { .type = NLA_NESTED },
  };
  
 +static const struct nla_policy
@@ -884,7 +884,7 @@ Subject: [PATCH] wifi: mt76: mt7915: certification patches
  struct csi_null_tone {
  	u8 start;
  	u8 end;
-@@ -797,6 +820,149 @@ mt7915_vendor_amnt_ctrl_dump(struct wiph
+@@ -933,6 +956,149 @@ mt7915_vendor_amnt_ctrl_dump(struct wiph
  	return len + 1;
  }
  
@@ -1034,7 +1034,7 @@ Subject: [PATCH] wifi: mt76: mt7915: certification patches
  static const struct wiphy_vendor_command mt7915_vendor_commands[] = {
  	{
  		.info = {
-@@ -821,6 +987,28 @@ static const struct wiphy_vendor_command
+@@ -957,6 +1123,28 @@ static const struct wiphy_vendor_command
  		.dumpit = mt7915_vendor_amnt_ctrl_dump,
  		.policy = amnt_ctrl_policy,
  		.maxattr = MTK_VENDOR_ATTR_AMNT_CTRL_MAX,

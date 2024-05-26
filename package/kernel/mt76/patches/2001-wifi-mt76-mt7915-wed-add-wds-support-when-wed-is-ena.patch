@@ -1,7 +1,7 @@
-From ab7172fb880f05bc6005a78982278c5b365055b4 Mon Sep 17 00:00:00 2001
+From 0454c032c589da59ef4e44654d2f650e273e215a Mon Sep 17 00:00:00 2001
 From: Sujuan Chen <sujuan.chen@mediatek.com>
 Date: Tue, 13 Dec 2022 17:51:26 +0800
-Subject: [PATCH 2001/2014] wifi: mt76: mt7915: wed: add wds support when wed
+Subject: [PATCH 2001/2015] wifi: mt76: mt7915: wed: add wds support when wed
  is enabled
 
 Signed-off-by: Sujuan Chen <sujuan.chen@mediatek.com>
@@ -48,7 +48,7 @@ Signed-off-by: Sujuan Chen <sujuan.chen@mediatek.com>
  	if (idx < 0)
  		return -ENOSPC;
  
-@@ -1323,6 +1330,13 @@ static void mt7915_sta_set_4addr(struct
+@@ -1332,6 +1339,13 @@ static void mt7915_sta_set_4addr(struct
  	else
  		clear_bit(MT_WCID_FLAG_4ADDR, &msta->wcid.flags);
  
@@ -62,7 +62,7 @@ Signed-off-by: Sujuan Chen <sujuan.chen@mediatek.com>
  	mt76_connac_mcu_wtbl_update_hdr_trans(&dev->mt76, vif, sta);
  }
  
-@@ -1773,8 +1787,12 @@ mt7915_net_fill_forward_path(struct ieee
+@@ -1782,8 +1796,12 @@ mt7915_net_fill_forward_path(struct ieee
  	path->dev = ctx->dev;
  	path->mtk_wdma.wdma_idx = wed->wdma_idx;
  	path->mtk_wdma.bss = mvif->mt76.idx;

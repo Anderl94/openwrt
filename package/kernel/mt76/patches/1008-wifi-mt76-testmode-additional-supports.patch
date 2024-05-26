@@ -1,7 +1,7 @@
-From e6c4c7343a54ef607d8ceafa4615a32165c121fd Mon Sep 17 00:00:00 2001
+From aba0454fa24cdc1f0650375d4e3264778c3756ab Mon Sep 17 00:00:00 2001
 From: Shayne Chen <shayne.chen@mediatek.com>
 Date: Thu, 21 Apr 2022 15:43:19 +0800
-Subject: [PATCH] wifi: mt76: testmode: additional supports
+Subject: [PATCH 1008/1051] wifi: mt76: testmode: additional supports
 
 Signed-off-by: Shayne Chen <shayne.chen@mediatek.com>
 Signed-off-by: StanleyYP Wang <StanleyYP.Wang@mediatek.com>
@@ -290,7 +290,7 @@ Signed-off-by: StanleyYP Wang <StanleyYP.Wang@mediatek.com>
  		}
 --- a/mt7915/init.c
 +++ b/mt7915/init.c
-@@ -727,7 +727,7 @@ static void mt7915_init_work(struct work
+@@ -694,7 +694,7 @@ static void mt7915_init_work(struct work
  	struct mt7915_dev *dev = container_of(work, struct mt7915_dev,
  				 init_work);
  
@@ -379,7 +379,7 @@ Signed-off-by: StanleyYP Wang <StanleyYP.Wang@mediatek.com>
  #endif
  }
  
-@@ -1420,7 +1444,7 @@ mt7915_mac_restart(struct mt7915_dev *de
+@@ -1379,7 +1403,7 @@ mt7915_mac_restart(struct mt7915_dev *de
  		goto out;
  
  	/* set the necessary init items */
@@ -554,7 +554,7 @@ Signed-off-by: StanleyYP Wang <StanleyYP.Wang@mediatek.com>
  	[AGG_ACR0]		= 0x054,
 --- a/mt7915/mt7915.h
 +++ b/mt7915/mt7915.h
-@@ -306,11 +306,15 @@ struct mt7915_phy {
+@@ -319,11 +319,15 @@ struct mt7915_phy {
  
  		s32 last_freq_offset;
  		u8 last_rcpi[4];
@@ -570,7 +570,7 @@ Signed-off-by: StanleyYP Wang <StanleyYP.Wang@mediatek.com>
  	} test;
  #endif
  
-@@ -423,6 +427,14 @@ struct mt7915_dev {
+@@ -440,6 +444,14 @@ struct mt7915_dev {
  	void __iomem *dcm;
  	void __iomem *sku;
  
@@ -585,7 +585,7 @@ Signed-off-by: StanleyYP Wang <StanleyYP.Wang@mediatek.com>
  #ifdef MTK_DEBUG
  	u16 wlan_idx;
  	struct {
-@@ -603,8 +615,8 @@ int mt7915_mcu_set_fixed_rate_ctrl(struc
+@@ -620,8 +632,8 @@ int mt7915_mcu_set_fixed_rate_ctrl(struc
  				   struct ieee80211_vif *vif,
  				   struct ieee80211_sta *sta,
  				   void *data, u32 field);
@@ -596,7 +596,7 @@ Signed-off-by: StanleyYP Wang <StanleyYP.Wang@mediatek.com>
  int mt7915_mcu_get_eeprom_free_block(struct mt7915_dev *dev, u8 *block_num);
  int mt7915_mcu_set_mac(struct mt7915_dev *dev, int band, bool enable,
  		       bool hdr_trans);
-@@ -643,6 +655,7 @@ int mt7915_mcu_fw_log_2_host(struct mt79
+@@ -660,6 +672,7 @@ int mt7915_mcu_fw_log_2_host(struct mt79
  int mt7915_mcu_fw_dbg_ctrl(struct mt7915_dev *dev, u32 module, u8 level);
  void mt7915_mcu_rx_event(struct mt7915_dev *dev, struct sk_buff *skb);
  void mt7915_mcu_exit(struct mt7915_dev *dev);

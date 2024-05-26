@@ -1,7 +1,7 @@
-From 6b84e5955fac1b324c5ad7bf2ea585e6531697a7 Mon Sep 17 00:00:00 2001
+From 0f8d644d9c7ab28e9e4da56151987a3e4be1f55f Mon Sep 17 00:00:00 2001
 From: Bo Jiao <Bo.Jiao@mediatek.com>
 Date: Tue, 6 Feb 2024 14:46:59 +0800
-Subject: [PATCH 1048/1053] wifi: mt76: mt7915: add SER overlap handle
+Subject: [PATCH 1047/1051] wifi: mt76: mt7915: add SER overlap handle
 
 CR-ID: WCNCR00355921
 Signed-off-by: Bo Jiao <Bo.Jiao@mediatek.com>
@@ -75,7 +75,7 @@ Signed-off-by: Bo Jiao <Bo.Jiao@mediatek.com>
  	u32 wcid_phy_mask[DIV_ROUND_UP(MT76_N_WCIDS, 32)];
 --- a/mt7915/mac.c
 +++ b/mt7915/mac.c
-@@ -1579,6 +1579,7 @@ void mt7915_mac_reset_work(struct work_s
+@@ -1538,6 +1538,7 @@ void mt7915_mac_reset_work(struct work_s
  	if (!(READ_ONCE(dev->recovery.state) & MT_MCU_CMD_STOP_DMA))
  		return;
  
@@ -83,7 +83,7 @@ Signed-off-by: Bo Jiao <Bo.Jiao@mediatek.com>
  	dev_info(dev->mt76.dev,"\n%s L1 SER recovery start.",
  		 wiphy_name(dev->mt76.hw->wiphy));
  
-@@ -1645,6 +1646,7 @@ void mt7915_mac_reset_work(struct work_s
+@@ -1604,6 +1605,7 @@ void mt7915_mac_reset_work(struct work_s
  
  	mt7915_update_beacons(dev);
  
@@ -91,7 +91,7 @@ Signed-off-by: Bo Jiao <Bo.Jiao@mediatek.com>
  	dev_info(dev->mt76.dev,"\n%s L1 SER recovery completed.",
  		 wiphy_name(dev->mt76.hw->wiphy));
  }
-@@ -1783,6 +1785,15 @@ void mt7915_reset(struct mt7915_dev *dev
+@@ -1742,6 +1744,15 @@ void mt7915_reset(struct mt7915_dev *dev
  		return;
  	}
  

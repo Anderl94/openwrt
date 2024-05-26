@@ -1,7 +1,7 @@
-From 539de29220ad63d73fdb1ff86d63014b4e246e3a Mon Sep 17 00:00:00 2001
+From d2be9fd8f4889bfde955ab9aeb865d4359e0edd5 Mon Sep 17 00:00:00 2001
 From: Yi-Chia Hsieh <yi-chia.hsieh@mediatek.com>
 Date: Fri, 23 Jun 2023 06:06:21 +0800
-Subject: [PATCH 1031/1053] wifi: mt76: mt7915: report tx and rx byte to
+Subject: [PATCH 1031/1051] wifi: mt76: mt7915: report tx and rx byte to
  tpt_led when wed is enabled
 
 Signed-off-by: Yi-Chia Hsieh <yi-chia.hsieh@mediatek.com>

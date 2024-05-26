@@ -1,12 +1,23 @@
-From ef9b267adeee3803ae8ee3073d2ebcbd3e1c95f9 Mon Sep 17 00:00:00 2001
+From ed564a0fe9b656b67eafc74c63aa747b43c49580 Mon Sep 17 00:00:00 2001
 From: Peter Chiu <chui-hao.chiu@mediatek.com>
 Date: Mon, 29 Jan 2024 15:33:24 +0800
-Subject: [PATCH] wifi: mt76: mt7915: limit per-band token count
+Subject: [PATCH 13/21] wifi: mt76: mt7915: limit per-band token count
 
 Add a threshold for per-band token count to prevent a band from interfering
 with the other band.
 
 Signed-off-by: Peter Chiu <chui-hao.chiu@mediatek.com>
+---
+ mt76.h            |  8 +++++++-
+ mt76_connac_mac.c |  2 ++
+ mt7915/init.c     |  3 +++
+ mt7915/mac.c      |  3 ++-
+ mt7921/pci_mac.c  |  2 +-
+ mt7925/pci_mac.c  |  2 +-
+ mt7996/init.c     |  5 +++++
+ mt7996/mac.c      |  3 ++-
+ tx.c              | 20 ++++++++++++++++++--
+ 9 files changed, 41 insertions(+), 7 deletions(-)
 
 --- a/mt76.h
 +++ b/mt76.h

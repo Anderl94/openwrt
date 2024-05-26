@@ -1,7 +1,7 @@
-From e9cf08519595e2d8c5c227486948d8cb00db626a Mon Sep 17 00:00:00 2001
+From cf2a6fb7145d4083bd06558fcad669f91517b6ad Mon Sep 17 00:00:00 2001
 From: Evelyn Tsai <evelyn.tsai@mediatek.com>
 Date: Thu, 24 Aug 2023 03:01:27 +0800
-Subject: [PATCH 1035/1053] wifi: mt76: update debugfs knob for tx tokens
+Subject: [PATCH 1035/1051] wifi: mt76: update debugfs knob for tx tokens
 
 1. dump token pending time
 2. dump per-band token counts

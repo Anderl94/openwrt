@@ -1,7 +1,7 @@
-From 090c1e87976b841379871abfa75879dc115e4224 Mon Sep 17 00:00:00 2001
+From b523d127286292b2915eda127d35001ee67ab461 Mon Sep 17 00:00:00 2001
 From: mtk27835 <shurong.wen@mediatek.com>
 Date: Wed, 7 Sep 2022 14:01:29 -0700
-Subject: [PATCH 1019/1053] wifi: mt76: mt7915: add ibf control vendor cmd
+Subject: [PATCH 1019/1051] wifi: mt76: mt7915: add ibf control vendor cmd
 
 Signed-off-by: mtk27835 <shurong.wen@mediatek.com>
 ---
@@ -11,7 +11,7 @@ Signed-off-by: mtk27835 <shurong.wen@mediatek.com>
 
 --- a/mt7915/vendor.c
 +++ b/mt7915/vendor.c
-@@ -87,6 +87,11 @@ edcca_dump_policy[NUM_MTK_VENDOR_ATTRS_E
+@@ -88,6 +88,11 @@ edcca_dump_policy[NUM_MTK_VENDOR_ATTRS_E
         [MTK_VENDOR_ATTR_EDCCA_DUMP_SEC80_VAL] = { .type = NLA_U8 },
  };
  
@@ -23,7 +23,7 @@ Signed-off-by: mtk27835 <shurong.wen@mediatek.com>
  struct csi_null_tone {
  	u8 start;
  	u8 end;
-@@ -1209,6 +1214,54 @@ static int mt7915_vendor_3wire_ctrl(stru
+@@ -1345,6 +1350,54 @@ static int mt7915_vendor_3wire_ctrl(stru
  	return mt7915_mcu_set_cfg(phy, CFGINFO_3WIRE_EN_CFG, three_wire_mode);
  }
  
@@ -78,7 +78,7 @@ Signed-off-by: mtk27835 <shurong.wen@mediatek.com>
  
  static const struct wiphy_vendor_command mt7915_vendor_commands[] = {
  	{
-@@ -1302,6 +1355,18 @@ static const struct wiphy_vendor_command
+@@ -1438,6 +1491,18 @@ static const struct wiphy_vendor_command
  		.doit = mt7915_vendor_3wire_ctrl,
  		.policy = three_wire_ctrl_policy,
  		.maxattr = MTK_VENDOR_ATTR_3WIRE_CTRL_MAX,
@@ -109,7 +109,7 @@ Signed-off-by: mtk27835 <shurong.wen@mediatek.com>
  };
  
  
-@@ -225,4 +226,26 @@ enum mtk_vendor_attr_phy_capa_dump {
+@@ -238,4 +239,26 @@ enum mtk_vendor_attr_phy_capa_dump {
  		NUM_MTK_VENDOR_ATTRS_PHY_CAPA_DUMP - 1
  };
  

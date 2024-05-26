@@ -1,7 +1,7 @@
-From cc213fc945f430c8767ee6984741c3cf9a030d9c Mon Sep 17 00:00:00 2001
+From dc97f22df64689fe6d5cf9e410437c8d9510a41c Mon Sep 17 00:00:00 2001
 From: StanleyYP Wang <StanleyYP.Wang@mediatek.com>
 Date: Tue, 11 Jul 2023 17:06:04 +0800
-Subject: [PATCH 1030/1053] wifi: mt76: mt7915: add txpower info dump support
+Subject: [PATCH 1030/1051] wifi: mt76: mt7915: add txpower info dump support
 
 Signed-off-by: StanleyYP Wang <StanleyYP.Wang@mediatek.com>
 ---
@@ -91,7 +91,7 @@ Signed-off-by: StanleyYP Wang <StanleyYP.Wang@mediatek.com>
 +		   basic_info.mu_tx_power_auto, basic_info.mu_tx_power_manual);
 +	seq_printf(file, "    Thermal Compensation:  %s\n",
 +		   basic_info.thermal_compensate_enable ? "enable" : "disable");
-+	seq_printf(file, "    Thermal Compensation Value: %d\n",
++	seq_printf(file, "    Theraml Compensation Value: %d\n",
 +		   basic_info.thermal_compensate_value);
 +
 +out:
@@ -104,7 +104,7 @@ Signed-off-by: StanleyYP Wang <StanleyYP.Wang@mediatek.com>
  mt7915_twt_stats(struct seq_file *s, void *data)
  {
  	struct mt7915_dev *dev = dev_get_drvdata(s->private);
-@@ -1388,6 +1473,8 @@ int mt7915_init_debugfs(struct mt7915_ph
+@@ -1433,6 +1518,8 @@ int mt7915_init_debugfs(struct mt7915_ph
  			    &mt7915_txpower_fops);
  	debugfs_create_file("txpower_path", 0400, dir, phy,
  			    &mt7915_txpower_path_fops);

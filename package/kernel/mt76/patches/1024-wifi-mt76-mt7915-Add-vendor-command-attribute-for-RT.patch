@@ -1,7 +1,7 @@
-From b6063c3c2566911919194c88cb9b68e68596d994 Mon Sep 17 00:00:00 2001
+From 0b4edb9d0fa52ebe9bf4a1c1f152515296afc657 Mon Sep 17 00:00:00 2001
 From: "himanshu.goyal" <himanshu.goyal@mediatek.com>
 Date: Tue, 24 Jan 2023 14:32:08 +0800
-Subject: [PATCH 1024/1053] wifi: mt76: mt7915: Add vendor command attribute
+Subject: [PATCH 1024/1051] wifi: mt76: mt7915: Add vendor command attribute
  for RTS BW signaling.
 
 Signed-off-by: himanshu.goyal <himanshu.goyal@mediatek.com>
@@ -59,7 +59,7 @@ Signed-off-by: himanshu.goyal <himanshu.goyal@mediatek.com>
  
 --- a/mt7915/vendor.c
 +++ b/mt7915/vendor.c
-@@ -34,6 +34,7 @@ wireless_ctrl_policy[NUM_MTK_VENDOR_ATTR
+@@ -35,6 +35,7 @@ wireless_ctrl_policy[NUM_MTK_VENDOR_ATTR
  	[MTK_VENDOR_ATTR_WIRELESS_CTRL_AMSDU] = {.type = NLA_U8 },
  	[MTK_VENDOR_ATTR_WIRELESS_CTRL_MU_EDCA] = {.type = NLA_U8 },
  	[MTK_VENDOR_ATTR_WIRELESS_CTRL_CERT] = {.type = NLA_U8 },
@@ -67,7 +67,7 @@ Signed-off-by: himanshu.goyal <himanshu.goyal@mediatek.com>
  };
  
  static const struct nla_policy
-@@ -1013,6 +1014,9 @@ static int mt7915_vendor_wireless_ctrl(s
+@@ -1149,6 +1150,9 @@ static int mt7915_vendor_wireless_ctrl(s
  	} else if (tb[MTK_VENDOR_ATTR_WIRELESS_CTRL_AMSDU]) {
  		val8 = nla_get_u8(tb[MTK_VENDOR_ATTR_WIRELESS_CTRL_AMSDU]);
  		mt7915_set_wireless_amsdu(hw, val8);

@@ -1,7 +1,7 @@
-From 2674288ca511860d73b068f73c14d864de13653f Mon Sep 17 00:00:00 2001
+From bbcd1a6d3d84c1cb1a82fe996bf825c11878289c Mon Sep 17 00:00:00 2001
 From: Peter Chiu <chui-hao.chiu@mediatek.com>
 Date: Mon, 2 Oct 2023 14:00:13 +0800
-Subject: [PATCH 1039/1053] wifi: mt76: mt7915: add debuffs knob for protect
+Subject: [PATCH 1038/1051] wifi: mt76: mt7915: add debuffs knob for protect
  threshold
 
 ---
@@ -11,7 +11,7 @@ Subject: [PATCH 1039/1053] wifi: mt76: mt7915: add debuffs knob for protect
 
 --- a/mt7915/mt7915.h
 +++ b/mt7915/mt7915.h
-@@ -778,6 +778,7 @@ void mt7915_mcu_set_rfeature_starec(void
+@@ -795,6 +795,7 @@ void mt7915_mcu_set_rfeature_starec(void
  		       struct ieee80211_vif *vif, struct ieee80211_sta *sta);
  int mt7915_mcu_set_rfeature_trig_type(struct mt7915_phy *phy, u8 enable, u8 trig_type);
  int mt7915_mcu_set_mu_dl_ack_policy(struct mt7915_phy *phy, u8 policy_num);

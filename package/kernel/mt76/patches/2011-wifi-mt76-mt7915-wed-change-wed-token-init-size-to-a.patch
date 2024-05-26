@@ -1,7 +1,7 @@
-From 27111a53eab45e86c00c1f5cf8e2d8fd76b65424 Mon Sep 17 00:00:00 2001
+From a21e557d571d24801dbc7ebd403cefaec0b30f02 Mon Sep 17 00:00:00 2001
 From: "sujuan.chen" <sujuan.chen@mediatek.com>
 Date: Mon, 11 Sep 2023 17:57:32 +0800
-Subject: [PATCH 2011/2014] wifi: mt76: mt7915: wed: change wed token init size
+Subject: [PATCH 2011/2015] wifi: mt76: mt7915: wed: change wed token init size
  to adapt wed version
 
 Signed-off-by: sujuan.chen <sujuan.chen@mediatek.com>

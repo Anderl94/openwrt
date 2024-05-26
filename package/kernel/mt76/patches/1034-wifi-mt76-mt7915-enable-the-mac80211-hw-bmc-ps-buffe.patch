@@ -1,8 +1,8 @@
-From 20c497b434dc4555210ea64cde38dd86817d8891 Mon Sep 17 00:00:00 2001
+From fd4211f53ab7973c1875881dcdaa12e252b95670 Mon Sep 17 00:00:00 2001
 From: Evelyn Tsai <evelyn.tsai@mediatek.com>
 Date: Thu, 24 Aug 2023 03:01:27 +0800
-Subject: [PATCH] wifi: mt76: mt7915: enable the mac80211 hw bmc ps buffer
- function.
+Subject: [PATCH 1034/1051] wifi: mt76: mt7915: enable the mac80211 hw bmc ps
+ buffer function.
 
 ---
  mt7915/init.c | 1 +

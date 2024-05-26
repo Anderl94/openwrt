@@ -1,7 +1,7 @@
-From 016069539c9436262f37516462e9396e6f63b550 Mon Sep 17 00:00:00 2001
+From 3ad316d5a0d9caa9a07597ac59df0663daf3e319 Mon Sep 17 00:00:00 2001
 From: StanleyYP Wang <StanleyYP.Wang@mediatek.com>
 Date: Mon, 4 Mar 2024 11:29:06 +0800
-Subject: [PATCH 1049/1053] wifi: mt76: mt7915: add background radar hw cap
+Subject: [PATCH 1048/1051] wifi: mt76: mt7915: add background radar hw cap
  check
 
 Signed-off-by: StanleyYP Wang <StanleyYP.Wang@mediatek.com>
