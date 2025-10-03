@@ -155,6 +155,8 @@ define Device/friendlyarm_nanopi-r6c
   DEVICE_VENDOR := FriendlyARM
   DEVICE_MODEL := NanoPi R6C
   DEVICE_PACKAGES := kmod-r8169
+  DEVICE_DTS := rk3588s-nanopi-r6c
+  DEVICE_DTS_DIR := rockchip
 endef
 TARGET_DEVICES += friendlyarm_nanopi-r6c
 
